@@ -21,7 +21,7 @@
       tab.id, {'msg': 'get-selection'}
     );
     return 'org-protocol://capture'
-      + '?url=' + encodeURIComponent(url)
+      + '?template=b&url=' + encodeURIComponent(url)
       + '&title=' + encodeURIComponent(title)
       + '&body=' + encodeURIComponent(await selection);
   };
