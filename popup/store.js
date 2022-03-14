@@ -45,8 +45,8 @@
   );
 
   window.addEventListener(
-    'keyup', async event => {
-      if (event.keyCode == 'C'.charCodeAt(0)) {
+    'keydown', async event => {
+      if (event.code == 'c') {
         return await captureListener(event);
       }
     }
