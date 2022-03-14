@@ -6,7 +6,9 @@
   "icons": {
     "48": "emacs48.png"
   },
-  "permissions": ["activeTab"],
+  "permissions": [
+    "activeTab"
+  ],
   "browser_specific_settings": {
     "gecko": {
       "id": "org-protocol@yidajiabei.xyz",
@@ -15,15 +17,21 @@
   },
   "page_action": {
     "browser_style": true,
-    "default_icon":  "emacs48.png",
+    "default_icon": "emacs48.png",
     "default_title": "org-store",
     "default_popup": "popup/store.html",
-    "show_matches": ["<all_urls>"]
+    "show_matches": [
+      "<all_urls>"
+    ]
   },
   "content_scripts": [
     {
-      "matches": ["<all_urls>"],
-      "js": ["content-script.js"]
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "content-script.js"
+      ]
     }
   ],
   "commands": {

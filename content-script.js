@@ -1,5 +1,5 @@
-"use strict";
+'use strict';
 
-browser.runtime.onMessage.addListener(async request => {
+browser.runtime.onMessage.addListener(async (request) => {
   return window.getSelection().toString();
 });
