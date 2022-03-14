@@ -1,4 +1,4 @@
-"use strict";
+'use strict';
 
 (async function () {
   const tabs = await browser.tabs.query({ currentWindow: true, active: true });
@@ -7,48 +7,51 @@
   const url = tab.url;
   const title = tab.title;
 
-  document.getElementById("url").textContent = url;
-  document.getElementById("title").textContent = title;
+  document.getElementById('url').textContent = url;
+  document.getElementById('title').textContent = title;
 
   const storeUri = async () => {
-    return 'org-protocol://store-link'
-      + '?url=' + encodeURIComponent(url)
-      + '&title=' + encodeURIComponent(title);
+    return (
+      'org-protocol://store-link' +
+      '?url=' +
+      encodeURIComponent(url) +
+      '&title=' +
+      encodeURIComponent(title)
+    );
   };
 
   const captureUri = async () => {
-    const selection = browser.tabs.sendMessage(
-      tab.id, {'msg': 'get-selection'}
+    const selection = browser.tabs.sendMessage(tab.id, {
+      msg: 'get-selection',
+    });
+    return (
+      'org-protocol://capture' +
+      '?template=b&url=' +
+      encodeURIComponent(url) +
+      '&title=' +
+      encodeURIComponent(title) +
+      '&body=' +
+      encodeURIComponent(await selection)
     );
-    return 'org-protocol://capture'
-      + '?template=b&url=' + encodeURIComponent(url)
-      + '&title=' + encodeURIComponent(title)
-      + '&body=' + encodeURIComponent(await selection);
   };
 
-  const storeListener = async event => {
-    browser.tabs.update({url: await storeUri()});
-    event.currentTarget.classList.add("clicked");
+  const storeListener = async (event) => {
+    browser.tabs.update({ url: await storeUri() });
+    event.currentTarget.classList.add('clicked');
     event.currentTarget.removeEventListener('click', storeListener);
   };
-  const captureListener = async event => {
-    browser.tabs.update({url: await captureUri()});
+  const captureListener = async (_event) => {
+    browser.tabs.update({ url: await captureUri() });
     window.close();
   };
 
-  document.getElementById("store").addEventListener(
-    'click', storeListener
-  );
+  document.getElementById('store').addEventListener('click', storeListener);
 
-  document.getElementById("capture").addEventListener(
-    'click', captureListener
-  );
+  document.getElementById('capture').addEventListener('click', captureListener);
 
-  window.addEventListener(
-    'keydown', async event => {
-      if (event.code == 'c') {
+  window.addEventListener('keydown', async function (event) {
+      if (event.code == "KeyC") {
         return await captureListener(event);
       }
-    }
-  );
+    });
 })();
