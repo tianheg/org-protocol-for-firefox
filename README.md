@@ -1,5 +1,9 @@
 # org-protocol
 
+## 问题发现
+
+1. 按过快捷键后，无法直接按 c 键 capture，必须在弹出的页面上才能使用快捷键 C 进行 capture；
+
 ## CHANGELOG
 
 ### v1.0.2 fix: capture key 2nd
